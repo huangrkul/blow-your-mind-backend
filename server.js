@@ -3,9 +3,9 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 // const axios = require('axios');
 const pg = require('pg');
-const app = express();
 require('dotenv').config();
 const port = process.env.PORT || 3001;
+const app = express();
 const client = new pg.Client(process.env.DATABASE_URL);
 
 app.use(cors());
@@ -16,10 +16,16 @@ app.get('/',(req, res) => {
   res.send('connected');
 })
 
-app.all('/postRank',(req, res) => {
-  let {player, difficulty, timeLeft, chancesLeft, hintsLeft} = req.body;
-  let safeValues = [player, difficulty, timeLeft, chancesLeft, hintsLeft];
-  console.log(safeValues);
+app.post('/postRank',(req, res) => {
+  let {player, difficulty, time, chance, hint} = req.body;
+  let SQL = 'INSERT INTO bym_rank(player_name, difficulty, time_left, chances_left, hints_left) VALUES ($1, $2, $3, $4, $5);'
+  let safeValues = [player, difficulty, time, chance, hint];
+  
+  client.query(SQL, safeValues)
+    .then(result => {
+      console.log(result);
+    })
+    .catch(error => {console.error(error)})
 })
 
 app.get('/showRanks',(req, res) => {

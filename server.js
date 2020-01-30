@@ -17,19 +17,23 @@ app.get('/',(req, res) => {
 })
 
 app.post('/postRank',(req, res) => {
-  let {player, difficulty, time, chance, hint} = req.body;
-  let SQL = 'INSERT INTO bym_rank(player_name, difficulty, time_left, chances_left, hints_left) VALUES ($1, $2, $3, $4, $5);'
-  let safeValues = [player, difficulty, time, chance, hint];
+  let {player, difficulty, time, chance, hint, total} = req.body;
+  let SQL = 'INSERT INTO bym_rank(player_name, difficulty, time_left, chances_left, hints_left, total) VALUES ($1, $2, $3, $4, $5, $6);'
+  let safeValues = [player, difficulty, time, chance, hint, total];
   
   client.query(SQL, safeValues)
-    .then(result => {
-      console.log(result);
-    })
+    // .then(result => {
+    //   console.log(result);
+    // })
     .catch(error => {console.error(error)})
 })
 
 app.get('/showRanks',(req, res) => {
   const SQL = 'SELECT * FROM bym_rank;';
+  client.query(SQL)
+    .then(result => {
+      res.send(result);
+    })
 })
 
 app.get('*',(req, res) => {

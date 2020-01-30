@@ -5,7 +5,8 @@ CREATE TABLE IF NOT EXISTS bym_rank(
   difficulty VARCHAR(255),
   time_left INTEGER,
   chances_left INTEGER,
-  hints_left INTEGER
+  hints_left INTEGER,
+  total INTEGER
 );
 
 

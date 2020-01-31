@@ -10,7 +10,6 @@ const client = new pg.Client(process.env.DATABASE_URL);
 
 var corsOptions = {
   origin: 'http://willhuanganimator.com',
-  methods: ['GET', 'POST'],
   optionsSuccessStatus: 200
 }
 
@@ -22,7 +21,7 @@ app.get('/',(req, res) => {
   res.send('connected');
 })
 
-app.post('/postRank',(req, res) => {
+app.post('/postRank', cors(corsOptions), (req, res) => {
   let {player, difficulty, time, chance, hint, total} = req.body;
   let SQL = 'INSERT INTO bym_rank(player_name, difficulty, time_left, chances_left, hints_left, total) VALUES ($1, $2, $3, $4, $5, $6);'
   let safeValues = [player, difficulty, time, chance, hint, total];
@@ -34,7 +33,7 @@ app.post('/postRank',(req, res) => {
     .catch(error => {console.error(error)})
 })
 
-app.get('/showRanks',(req, res) => {
+app.get('/showRanks', cors(corsOptions), (req, res) => {
   const SQL = 'SELECT * FROM bym_rank;';
   client.query(SQL)
     .then(result => {

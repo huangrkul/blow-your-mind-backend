@@ -9,7 +9,7 @@ const app = express();
 const client = new pg.Client(process.env.DATABASE_URL);
 
 var corsOptions = {
-  origin: 'http://willhuanganimator.com/',
+  origin: 'http://willhuanganimator.com',
   optionsSuccessStatus: 200
 }
 

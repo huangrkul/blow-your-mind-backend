@@ -8,6 +8,11 @@ const port = process.env.PORT || 3001;
 const app = express();
 const client = new pg.Client(process.env.DATABASE_URL);
 
+// var corsOptions = {
+//   origin: 'http://willhuanganimator.com',
+//   optionsSuccessStatus: 200
+// }
+
 app.use(cors());
 app.use(express.urlencoded({extended:true}));
 app.use(bodyParser.json());

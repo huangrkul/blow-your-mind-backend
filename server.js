@@ -10,6 +10,7 @@ const client = new pg.Client(process.env.DATABASE_URL);
 
 var corsOptions = {
   origin: 'http://willhuanganimator.com',
+  methods: ['get', 'post'],
   optionsSuccessStatus: 200
 }
 

@@ -9,7 +9,7 @@ const app = express();
 const client = new pg.Client(process.env.DATABASE_URL);
 
 var corsOptions = {
-  origin: 'http://willhuanganimator.com/projects/blow-your-mind-react/',
+  origin: 'http://willhuanganimator.com/',
   optionsSuccessStatus: 200
 }
 

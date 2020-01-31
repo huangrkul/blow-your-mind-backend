@@ -8,7 +8,12 @@ const port = process.env.PORT || 3001;
 const app = express();
 const client = new pg.Client(process.env.DATABASE_URL);
 
-app.use(cors());
+var corsOptions = {
+  origin: 'http://willhuanganimator.com/projects/blow-your-mind-react/',
+  optionsSuccessStatus: 200
+}
+
+app.use(cors(corsOptions));
 app.use(express.urlencoded({extended:true}));
 app.use(bodyParser.json());
 

@@ -41,18 +41,6 @@ app.get('/showRanks', (req, res) => {
     })
 })
 
-app.put('/updateRanks', (req, res) => {
-  let SQL = 'UPDATE bym_rank SET total=$1 WHERE id=$2;';
-  let ranks = req.body.updatedRanks;
-
-  ranks.forEach(rank => {
-    let safeValues = [rank.total, rank.id];
-    client.query(SQL, safeValues)
-      .catch(error => {console.error(error)})
-  })
-
-})
-
 app.get('*',(req, res) => {
   res.status(404).send('not found');
 })
